@@ -1,0 +1,956 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>42 | grant之后要跟着flush privileges吗？ · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="43.html" />
+    
+    
+    <link rel="prev" href="41.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    介绍
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.1.1" data-path="00.html">
+            
+                <a href="00.html">
+            
+                    
+                    开篇词 | 这一次，让我们一起来搞懂MySQL
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2" data-path="01.html">
+            
+                <a href="01.html">
+            
+                    
+                    01 | 基础架构：一条SQL查询语句是如何执行的？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.3" data-path="02.html">
+            
+                <a href="02.html">
+            
+                    
+                    02 | 日志系统：一条SQL更新语句是如何执行的？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4" data-path="03.html">
+            
+                <a href="03.html">
+            
+                    
+                    03 | 事务隔离：为什么你改了我还看不见？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.5" data-path="04.html">
+            
+                <a href="04.html">
+            
+                    
+                    04 | 深入浅出索引（上）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.6" data-path="05.html">
+            
+                <a href="05.html">
+            
+                    
+                    05 | 深入浅出索引（下）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.7" data-path="06.html">
+            
+                <a href="06.html">
+            
+                    
+                    06 | 全局锁和表锁 ：给表加个字段怎么有这么多阻碍？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.8" data-path="07.html">
+            
+                <a href="07.html">
+            
+                    
+                    07 | 行锁功过：怎么减少行锁对性能的影响？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.9" data-path="08.html">
+            
+                <a href="08.html">
+            
+                    
+                    08 | 事务到底是隔离的还是不隔离的？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.10" data-path="09.html">
+            
+                <a href="09.html">
+            
+                    
+                    09 | 普通索引和唯一索引，应该怎么选择？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.11" data-path="10.html">
+            
+                <a href="10.html">
+            
+                    
+                    10 | MySQL为什么有时候会选错索引？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.12" data-path="11.html">
+            
+                <a href="11.html">
+            
+                    
+                    11 | 怎么给字符串字段加索引？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.13" data-path="12.html">
+            
+                <a href="12.html">
+            
+                    
+                    12 | 为什么我的MySQL会“抖”一下？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.14" data-path="13.html">
+            
+                <a href="13.html">
+            
+                    
+                    13 | 为什么表数据删掉一半，表文件大小不变？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.15" data-path="14.html">
+            
+                <a href="14.html">
+            
+                    
+                    14 | count(*)这么慢，我该怎么办？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.16" data-path="15.html">
+            
+                <a href="15.html">
+            
+                    
+                    15 | 答疑文章（一）：日志和索引相关问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.17" data-path="16.html">
+            
+                <a href="16.html">
+            
+                    
+                    16 | “order by”是怎么工作的？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.18" data-path="17.html">
+            
+                <a href="17.html">
+            
+                    
+                    17 | 如何正确地显示随机消息？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.19" data-path="18.html">
+            
+                <a href="18.html">
+            
+                    
+                    18 | 为什么这些SQL语句逻辑相同，性能却差异巨大？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.20" data-path="19.html">
+            
+                <a href="19.html">
+            
+                    
+                    19 | 为什么我只查一行的语句，也执行这么慢？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.21" data-path="20.html">
+            
+                <a href="20.html">
+            
+                    
+                    20 | 幻读是什么，幻读有什么问题？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.22" data-path="21.html">
+            
+                <a href="21.html">
+            
+                    
+                    21 | 为什么我只改一行的语句，锁这么多？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.23" data-path="22.html">
+            
+                <a href="22.html">
+            
+                    
+                    22 | MySQL有哪些“饮鸩止渴”提高性能的方法？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.24" data-path="23.html">
+            
+                <a href="23.html">
+            
+                    
+                    23 | MySQL是怎么保证数据不丢的？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.25" data-path="24.html">
+            
+                <a href="24.html">
+            
+                    
+                    24 | MySQL是怎么保证主备一致的？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.26" data-path="25.html">
+            
+                <a href="25.html">
+            
+                    
+                    25 | MySQL是怎么保证高可用的？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.27" data-path="26.html">
+            
+                <a href="26.html">
+            
+                    
+                    26 | 备库为什么会延迟好几个小时？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.28" data-path="27.html">
+            
+                <a href="27.html">
+            
+                    
+                    27 | 主库出问题了，从库怎么办？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.29" data-path="28.html">
+            
+                <a href="28.html">
+            
+                    
+                    28 | 读写分离有哪些坑？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.30" data-path="29.html">
+            
+                <a href="29.html">
+            
+                    
+                    29 | 如何判断一个数据库是不是出问题了？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.31" data-path="30.html">
+            
+                <a href="30.html">
+            
+                    
+                    30 | 答疑文章（二）：用动态的观点看加锁
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.32" data-path="31.html">
+            
+                <a href="31.html">
+            
+                    
+                    31 | 误删数据后除了跑路，还能怎么办？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.33" data-path="32.html">
+            
+                <a href="32.html">
+            
+                    
+                    32 | 为什么还有kill不掉的语句？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.34" data-path="33.html">
+            
+                <a href="33.html">
+            
+                    
+                    33 | 我查这么多数据，会不会把数据库内存打爆？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.35" data-path="34.html">
+            
+                <a href="34.html">
+            
+                    
+                    34 | 到底可不可以使用join？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.36" data-path="35.html">
+            
+                <a href="35.html">
+            
+                    
+                    35 | join语句怎么优化？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.37" data-path="36.html">
+            
+                <a href="36.html">
+            
+                    
+                    36 | 为什么临时表可以重名？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.38" data-path="37.html">
+            
+                <a href="37.html">
+            
+                    
+                    37 | 什么时候会使用内部临时表？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.39" data-path="38.html">
+            
+                <a href="38.html">
+            
+                    
+                    38 | 都说InnoDB好，那还要不要使用Memory引擎？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.40" data-path="39.html">
+            
+                <a href="39.html">
+            
+                    
+                    39 | 自增主键为什么不是连续的？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.41" data-path="40.html">
+            
+                <a href="40.html">
+            
+                    
+                    40 | insert语句的锁为什么这么多？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.42" data-path="41.html">
+            
+                <a href="41.html">
+            
+                    
+                    41 | 怎么最快地复制一张表？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.1.43" data-path="42.html">
+            
+                <a href="42.html">
+            
+                    
+                    42 | grant之后要跟着flush privileges吗？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.44" data-path="43.html">
+            
+                <a href="43.html">
+            
+                    
+                    43 | 要不要使用分区表？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.45" data-path="44.html">
+            
+                <a href="44.html">
+            
+                    
+                    44 | 答疑文章（三）：说一说这些好问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.46" data-path="46.html">
+            
+                <a href="46.html">
+            
+                    
+                    45 | 自增id用完怎么办？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.47" data-path="46.html">
+            
+                <a href="46.html">
+            
+                    
+                    结束语 | 点线网面，一起构建MySQL知识网络
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >42 | grant之后要跟着flush privileges吗？</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="42--grant&#x4E4B;&#x540E;&#x8981;&#x8DDF;&#x7740;flush-privileges&#x5417;&#xFF1F;">42 | grant&#x4E4B;&#x540E;&#x8981;&#x8DDF;&#x7740;flush privileges&#x5417;&#xFF1F;</h1>
+<p>&#x5728; MySQL &#x91CC;&#x9762;&#xFF0C;grant &#x8BED;&#x53E5;&#x662F;&#x7528;&#x6765;&#x7ED9;&#x7528;&#x6237;&#x8D4B;&#x6743;&#x7684;&#x3002;&#x4E0D;&#x77E5;&#x9053;&#x4F60;&#x6709;&#x6CA1;&#x6709;&#x89C1;&#x8FC7;&#x4E00;&#x4E9B;&#x64CD;&#x4F5C;&#x6587;&#x6863;&#x91CC;&#x9762;&#x63D0;&#x5230;&#xFF0C;grant &#x4E4B;&#x540E;&#x8981;&#x9A6C;&#x4E0A;&#x8DDF;&#x7740;&#x6267;&#x884C;&#x4E00;&#x4E2A; flush privileges &#x547D;&#x4EE4;&#xFF0C;&#x624D;&#x80FD;&#x4F7F;&#x8D4B;&#x6743;&#x8BED;&#x53E5;&#x751F;&#x6548;&#x3002;&#x6211;&#x6700;&#x5F00;&#x59CB;&#x4F7F;&#x7528; MySQL &#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5C31;&#x662F;&#x7167;&#x7740;&#x4E00;&#x4E2A;&#x64CD;&#x4F5C;&#x6587;&#x6863;&#x7684;&#x8BF4;&#x660E;&#x6309;&#x7167;&#x8FD9;&#x4E2A;&#x987A;&#x5E8F;&#x64CD;&#x4F5C;&#x7684;&#x3002;</p>
+<p>&#x90A3;&#x4E48;&#xFF0C;grant &#x4E4B;&#x540E;&#x771F;&#x7684;&#x9700;&#x8981;&#x6267;&#x884C; flush privileges &#x5417;&#xFF1F;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x6267;&#x884C;&#x8FD9;&#x4E2A; flush &#x547D;&#x4EE4;&#x7684;&#x8BDD;&#xFF0C;&#x8D4B;&#x6743;&#x8BED;&#x53E5;&#x771F;&#x7684;&#x4E0D;&#x80FD;&#x751F;&#x6548;&#x5417;&#xFF1F;</p>
+<p>&#x63A5;&#x4E0B;&#x6765;&#xFF0C;&#x6211;&#x5C31;&#x5148;&#x548C;&#x4F60;&#x4ECB;&#x7ECD;&#x4E00;&#x4E0B; grant &#x8BED;&#x53E5;&#x548C; flush privileges &#x8BED;&#x53E5;&#x5206;&#x522B;&#x505A;&#x4E86;&#x4EC0;&#x4E48;&#x4E8B;&#x60C5;&#xFF0C;&#x7136;&#x540E;&#x518D;&#x4E00;&#x8D77;&#x6765;&#x5206;&#x6790;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x3002;</p>
+<p>&#x4E3A;&#x4E86;&#x4FBF;&#x4E8E;&#x8BF4;&#x660E;&#xFF0C;&#x6211;&#x5148;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x7528;&#x6237;&#xFF1A;</p>
+<pre><code>create user &apos;ua&apos;@&apos;%&apos; identified by &apos;pa&apos;;
+</code></pre><p>&#x8FD9;&#x6761;&#x8BED;&#x53E5;&#x7684;&#x903B;&#x8F91;&#x662F;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x7528;&#x6237;&#x2019;ua&#x2019;@&#x2019;%&#x2019;&#xFF0C;&#x5BC6;&#x7801;&#x662F; pa&#x3002;&#x6CE8;&#x610F;&#xFF0C;&#x5728; MySQL &#x91CC;&#x9762;&#xFF0C;&#x7528;&#x6237;&#x540D; (user)+ &#x5730;&#x5740; (host) &#x624D;&#x8868;&#x793A;&#x4E00;&#x4E2A;&#x7528;&#x6237;&#xFF0C;&#x56E0;&#x6B64; ua@ip1 &#x548C; ua@ip2 &#x4EE3;&#x8868;&#x7684;&#x662F;&#x4E24;&#x4E2A;&#x4E0D;&#x540C;&#x7684;&#x7528;&#x6237;&#x3002;</p>
+<p>&#x8FD9;&#x6761;&#x547D;&#x4EE4;&#x505A;&#x4E86;&#x4E24;&#x4E2A;&#x52A8;&#x4F5C;&#xFF1A;</p>
+<ol>
+<li>&#x78C1;&#x76D8;&#x4E0A;&#xFF0C;&#x5F80; mysql.user &#x8868;&#x91CC;&#x63D2;&#x5165;&#x4E00;&#x884C;&#xFF0C;&#x7531;&#x4E8E;&#x6CA1;&#x6709;&#x6307;&#x5B9A;&#x6743;&#x9650;&#xFF0C;&#x6240;&#x4EE5;&#x8FD9;&#x884C;&#x6570;&#x636E;&#x4E0A;&#x6240;&#x6709;&#x8868;&#x793A;&#x6743;&#x9650;&#x7684;&#x5B57;&#x6BB5;&#x7684;&#x503C;&#x90FD;&#x662F; N&#xFF1B;</li>
+<li>&#x5185;&#x5B58;&#x91CC;&#xFF0C;&#x5F80;&#x6570;&#x7EC4; acl_users &#x91CC;&#x63D2;&#x5165;&#x4E00;&#x4E2A; acl_user &#x5BF9;&#x8C61;&#xFF0C;&#x8FD9;&#x4E2A;&#x5BF9;&#x8C61;&#x7684; access &#x5B57;&#x6BB5;&#x503C;&#x4E3A; 0&#x3002;</li>
+</ol>
+<p>&#x56FE; 1 &#x5C31;&#x662F;&#x8FD9;&#x4E2A;&#x65F6;&#x523B;&#x7528;&#x6237; ua &#x5728; user &#x8868;&#x4E2D;&#x7684;&#x72B6;&#x6001;&#x3002;</p>
+<p><img src="../image/7e75bbfbca0cb932e1256941c99d5f35.png" alt="img"></p>
+<p>&#x56FE; 1 mysql.user &#x6570;&#x636E;&#x884C;</p>
+<p>&#x5728; MySQL &#x4E2D;&#xFF0C;&#x7528;&#x6237;&#x6743;&#x9650;&#x662F;&#x6709;&#x4E0D;&#x540C;&#x7684;&#x8303;&#x56F4;&#x7684;&#x3002;&#x63A5;&#x4E0B;&#x6765;&#xFF0C;&#x6211;&#x5C31;&#x6309;&#x7167;&#x7528;&#x6237;&#x6743;&#x9650;&#x8303;&#x56F4;&#x4ECE;&#x5927;&#x5230;&#x5C0F;&#x7684;&#x987A;&#x5E8F;&#x4F9D;&#x6B21;&#x548C;&#x4F60;&#x8BF4;&#x660E;&#x3002;</p>
+<h1 id="&#x5168;&#x5C40;&#x6743;&#x9650;">&#x5168;&#x5C40;&#x6743;&#x9650;</h1>
+<p>&#x5168;&#x5C40;&#x6743;&#x9650;&#xFF0C;&#x4F5C;&#x7528;&#x4E8E;&#x6574;&#x4E2A; MySQL &#x5B9E;&#x4F8B;&#xFF0C;&#x8FD9;&#x4E9B;&#x6743;&#x9650;&#x4FE1;&#x606F;&#x4FDD;&#x5B58;&#x5728; mysql &#x5E93;&#x7684; user &#x8868;&#x91CC;&#x3002;&#x5982;&#x679C;&#x6211;&#x8981;&#x7ED9;&#x7528;&#x6237; ua &#x8D4B;&#x4E00;&#x4E2A;&#x6700;&#x9AD8;&#x6743;&#x9650;&#x7684;&#x8BDD;&#xFF0C;&#x8BED;&#x53E5;&#x662F;&#x8FD9;&#x4E48;&#x5199;&#x7684;&#xFF1A;</p>
+<pre><code>grant all privileges on *.* to &apos;ua&apos;@&apos;%&apos; with grant option;
+</code></pre><p>&#x8FD9;&#x4E2A; grant &#x547D;&#x4EE4;&#x505A;&#x4E86;&#x4E24;&#x4E2A;&#x52A8;&#x4F5C;&#xFF1A;</p>
+<ol>
+<li>&#x78C1;&#x76D8;&#x4E0A;&#xFF0C;&#x5C06; mysql.user &#x8868;&#x91CC;&#xFF0C;&#x7528;&#x6237;&#x2019;ua&#x2019;@&#x2019;%&apos;&#x8FD9;&#x4E00;&#x884C;&#x7684;&#x6240;&#x6709;&#x8868;&#x793A;&#x6743;&#x9650;&#x7684;&#x5B57;&#x6BB5;&#x7684;&#x503C;&#x90FD;&#x4FEE;&#x6539;&#x4E3A;&#x2018;Y&#x2019;&#xFF1B;</li>
+<li>&#x5185;&#x5B58;&#x91CC;&#xFF0C;&#x4ECE;&#x6570;&#x7EC4; acl_users &#x4E2D;&#x627E;&#x5230;&#x8FD9;&#x4E2A;&#x7528;&#x6237;&#x5BF9;&#x5E94;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x5C06; access &#x503C;&#xFF08;&#x6743;&#x9650;&#x4F4D;&#xFF09;&#x4FEE;&#x6539;&#x4E3A;&#x4E8C;&#x8FDB;&#x5236;&#x7684;&#x201C;&#x5168; 1&#x201D;&#x3002;</li>
+</ol>
+<p>&#x5728;&#x8FD9;&#x4E2A; grant &#x547D;&#x4EE4;&#x6267;&#x884C;&#x5B8C;&#x6210;&#x540E;&#xFF0C;&#x5982;&#x679C;&#x6709;&#x65B0;&#x7684;&#x5BA2;&#x6237;&#x7AEF;&#x4F7F;&#x7528;&#x7528;&#x6237;&#x540D; ua &#x767B;&#x5F55;&#x6210;&#x529F;&#xFF0C;MySQL &#x4F1A;&#x4E3A;&#x65B0;&#x8FDE;&#x63A5;&#x7EF4;&#x62A4;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x5BF9;&#x8C61;&#xFF0C;&#x7136;&#x540E;&#x4ECE; acl_users &#x6570;&#x7EC4;&#x91CC;&#x67E5;&#x5230;&#x8FD9;&#x4E2A;&#x7528;&#x6237;&#x7684;&#x6743;&#x9650;&#xFF0C;&#x5E76;&#x5C06;&#x6743;&#x9650;&#x503C;&#x62F7;&#x8D1D;&#x5230;&#x8FD9;&#x4E2A;&#x7EBF;&#x7A0B;&#x5BF9;&#x8C61;&#x4E2D;&#x3002;&#x4E4B;&#x540E;&#x5728;&#x8FD9;&#x4E2A;&#x8FDE;&#x63A5;&#x4E2D;&#x6267;&#x884C;&#x7684;&#x8BED;&#x53E5;&#xFF0C;&#x6240;&#x6709;&#x5173;&#x4E8E;&#x5168;&#x5C40;&#x6743;&#x9650;&#x7684;&#x5224;&#x65AD;&#xFF0C;&#x90FD;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x7EBF;&#x7A0B;&#x5BF9;&#x8C61;&#x5185;&#x90E8;&#x4FDD;&#x5B58;&#x7684;&#x6743;&#x9650;&#x4F4D;&#x3002;</p>
+<p>&#x57FA;&#x4E8E;&#x4E0A;&#x9762;&#x7684;&#x5206;&#x6790;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x77E5;&#x9053;&#xFF1A;</p>
+<ol>
+<li>grant &#x547D;&#x4EE4;&#x5BF9;&#x4E8E;&#x5168;&#x5C40;&#x6743;&#x9650;&#xFF0C;&#x540C;&#x65F6;&#x66F4;&#x65B0;&#x4E86;&#x78C1;&#x76D8;&#x548C;&#x5185;&#x5B58;&#x3002;&#x547D;&#x4EE4;&#x5B8C;&#x6210;&#x540E;&#x5373;&#x65F6;&#x751F;&#x6548;&#xFF0C;&#x63A5;&#x4E0B;&#x6765;&#x65B0;&#x521B;&#x5EFA;&#x7684;&#x8FDE;&#x63A5;&#x4F1A;&#x4F7F;&#x7528;&#x65B0;&#x7684;&#x6743;&#x9650;&#x3002;</li>
+<li>&#x5BF9;&#x4E8E;&#x4E00;&#x4E2A;&#x5DF2;&#x7ECF;&#x5B58;&#x5728;&#x7684;&#x8FDE;&#x63A5;&#xFF0C;&#x5B83;&#x7684;&#x5168;&#x5C40;&#x6743;&#x9650;&#x4E0D;&#x53D7; grant &#x547D;&#x4EE4;&#x7684;&#x5F71;&#x54CD;&#x3002;</li>
+</ol>
+<p>&#x9700;&#x8981;&#x8BF4;&#x660E;&#x7684;&#x662F;&#xFF0C;<strong>&#x4E00;&#x822C;&#x5728;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x4E0A;&#x8981;&#x5408;&#x7406;&#x63A7;&#x5236;&#x7528;&#x6237;&#x6743;&#x9650;&#x7684;&#x8303;&#x56F4;</strong>&#x3002;&#x6211;&#x4EEC;&#x4E0A;&#x9762;&#x7528;&#x5230;&#x7684;&#x8FD9;&#x4E2A; grant &#x8BED;&#x53E5;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x5178;&#x578B;&#x7684;&#x9519;&#x8BEF;&#x793A;&#x8303;&#x3002;&#x5982;&#x679C;&#x4E00;&#x4E2A;&#x7528;&#x6237;&#x6709;&#x6240;&#x6709;&#x6743;&#x9650;&#xFF0C;&#x4E00;&#x822C;&#x5C31;&#x4E0D;&#x5E94;&#x8BE5;&#x8BBE;&#x7F6E;&#x4E3A;&#x6240;&#x6709; IP &#x5730;&#x5740;&#x90FD;&#x53EF;&#x4EE5;&#x8BBF;&#x95EE;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x8981;&#x56DE;&#x6536;&#x4E0A;&#x9762;&#x7684; grant &#x8BED;&#x53E5;&#x8D4B;&#x4E88;&#x7684;&#x6743;&#x9650;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4E0B;&#x9762;&#x8FD9;&#x6761;&#x547D;&#x4EE4;&#xFF1A;</p>
+<pre><code>revoke all privileges on *.* from &apos;ua&apos;@&apos;%&apos;;
+</code></pre><p>&#x8FD9;&#x6761; revoke &#x547D;&#x4EE4;&#x7684;&#x7528;&#x6CD5;&#x4E0E; grant &#x7C7B;&#x4F3C;&#xFF0C;&#x505A;&#x4E86;&#x5982;&#x4E0B;&#x4E24;&#x4E2A;&#x52A8;&#x4F5C;&#xFF1A;</p>
+<ol>
+<li>&#x78C1;&#x76D8;&#x4E0A;&#xFF0C;&#x5C06; mysql.user &#x8868;&#x91CC;&#xFF0C;&#x7528;&#x6237;&#x2019;ua&#x2019;@&#x2019;%&apos;&#x8FD9;&#x4E00;&#x884C;&#x7684;&#x6240;&#x6709;&#x8868;&#x793A;&#x6743;&#x9650;&#x7684;&#x5B57;&#x6BB5;&#x7684;&#x503C;&#x90FD;&#x4FEE;&#x6539;&#x4E3A;&#x201C;N&#x201D;&#xFF1B;</li>
+<li>&#x5185;&#x5B58;&#x91CC;&#xFF0C;&#x4ECE;&#x6570;&#x7EC4; acl_users &#x4E2D;&#x627E;&#x5230;&#x8FD9;&#x4E2A;&#x7528;&#x6237;&#x5BF9;&#x5E94;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x5C06; access &#x7684;&#x503C;&#x4FEE;&#x6539;&#x4E3A; 0&#x3002;</li>
+</ol>
+<h1 id="db-&#x6743;&#x9650;">db &#x6743;&#x9650;</h1>
+<p>&#x9664;&#x4E86;&#x5168;&#x5C40;&#x6743;&#x9650;&#xFF0C;MySQL &#x4E5F;&#x652F;&#x6301;&#x5E93;&#x7EA7;&#x522B;&#x7684;&#x6743;&#x9650;&#x5B9A;&#x4E49;&#x3002;&#x5982;&#x679C;&#x8981;&#x8BA9;&#x7528;&#x6237; ua &#x62E5;&#x6709;&#x5E93; db1 &#x7684;&#x6240;&#x6709;&#x6743;&#x9650;&#xFF0C;&#x53EF;&#x4EE5;&#x6267;&#x884C;&#x4E0B;&#x9762;&#x8FD9;&#x6761;&#x547D;&#x4EE4;&#xFF1A;</p>
+<pre><code>grant all privileges on db1.* to &apos;ua&apos;@&apos;%&apos; with grant option;
+</code></pre><p>&#x57FA;&#x4E8E;&#x5E93;&#x7684;&#x6743;&#x9650;&#x8BB0;&#x5F55;&#x4FDD;&#x5B58;&#x5728; mysql.db &#x8868;&#x4E2D;&#xFF0C;&#x5728;&#x5185;&#x5B58;&#x91CC;&#x5219;&#x4FDD;&#x5B58;&#x5728;&#x6570;&#x7EC4; acl_dbs &#x4E2D;&#x3002;&#x8FD9;&#x6761; grant &#x547D;&#x4EE4;&#x505A;&#x4E86;&#x5982;&#x4E0B;&#x4E24;&#x4E2A;&#x52A8;&#x4F5C;&#xFF1A;</p>
+<ol>
+<li>&#x78C1;&#x76D8;&#x4E0A;&#xFF0C;&#x5F80; mysql.db &#x8868;&#x4E2D;&#x63D2;&#x5165;&#x4E86;&#x4E00;&#x884C;&#x8BB0;&#x5F55;&#xFF0C;&#x6240;&#x6709;&#x6743;&#x9650;&#x4F4D;&#x5B57;&#x6BB5;&#x8BBE;&#x7F6E;&#x4E3A;&#x201C;Y&#x201D;&#xFF1B;</li>
+<li>&#x5185;&#x5B58;&#x91CC;&#xFF0C;&#x589E;&#x52A0;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x5230;&#x6570;&#x7EC4; acl_dbs &#x4E2D;&#xFF0C;&#x8FD9;&#x4E2A;&#x5BF9;&#x8C61;&#x7684;&#x6743;&#x9650;&#x4F4D;&#x4E3A;&#x201C;&#x5168; 1&#x201D;&#x3002;</li>
+</ol>
+<p>&#x56FE; 2 &#x5C31;&#x662F;&#x8FD9;&#x4E2A;&#x65F6;&#x523B;&#x7528;&#x6237; ua &#x5728; db &#x8868;&#x4E2D;&#x7684;&#x72B6;&#x6001;&#x3002;</p>
+<p><img src="../image/32cd61ee14ad2f370e1de0fb4e39bb2e.png" alt="img"></p>
+<p>&#x56FE; 2 mysql.db &#x6570;&#x636E;&#x884C;</p>
+<p>&#x6BCF;&#x6B21;&#x9700;&#x8981;&#x5224;&#x65AD;&#x4E00;&#x4E2A;&#x7528;&#x6237;&#x5BF9;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x5E93;&#x8BFB;&#x5199;&#x6743;&#x9650;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x90FD;&#x9700;&#x8981;&#x904D;&#x5386;&#x4E00;&#x6B21; acl_dbs &#x6570;&#x7EC4;&#xFF0C;&#x6839;&#x636E; user&#x3001;host &#x548C; db &#x627E;&#x5230;&#x5339;&#x914D;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x7136;&#x540E;&#x6839;&#x636E;&#x5BF9;&#x8C61;&#x7684;&#x6743;&#x9650;&#x4F4D;&#x6765;&#x5224;&#x65AD;&#x3002;</p>
+<p>&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#xFF0C;grant &#x4FEE;&#x6539; db &#x6743;&#x9650;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x662F;&#x540C;&#x65F6;&#x5BF9;&#x78C1;&#x76D8;&#x548C;&#x5185;&#x5B58;&#x751F;&#x6548;&#x7684;&#x3002;</p>
+<p>grant &#x64CD;&#x4F5C;&#x5BF9;&#x4E8E;&#x5DF2;&#x7ECF;&#x5B58;&#x5728;&#x7684;&#x8FDE;&#x63A5;&#x7684;&#x5F71;&#x54CD;&#xFF0C;&#x5728;&#x5168;&#x5C40;&#x6743;&#x9650;&#x548C;&#x57FA;&#x4E8E; db &#x7684;&#x6743;&#x9650;&#x6548;&#x679C;&#x662F;&#x4E0D;&#x540C;&#x7684;&#x3002;&#x63A5;&#x4E0B;&#x6765;&#xFF0C;&#x6211;&#x4EEC;&#x505A;&#x4E00;&#x4E2A;&#x5BF9;&#x7167;&#x8BD5;&#x9A8C;&#x6765;&#x5206;&#x522B;&#x770B;&#x4E00;&#x4E0B;&#x3002;</p>
+<p><img src="../image/aea26807c8895961b666a5d96b081ac7.png" alt="img"></p>
+<p>&#x56FE; 3 &#x6743;&#x9650;&#x64CD;&#x4F5C;&#x6548;&#x679C;</p>
+<p>&#x9700;&#x8981;&#x8BF4;&#x660E;&#x7684;&#x662F;&#xFF0C;&#x56FE;&#x4E2D; set global sync_binlog &#x8FD9;&#x4E2A;&#x64CD;&#x4F5C;&#x662F;&#x9700;&#x8981; super &#x6743;&#x9650;&#x7684;&#x3002;</p>
+<p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#xFF0C;&#x867D;&#x7136;&#x7528;&#x6237; ua &#x7684; super &#x6743;&#x9650;&#x5728; T3 &#x65F6;&#x523B;&#x5DF2;&#x7ECF;&#x901A;&#x8FC7; revoke &#x8BED;&#x53E5;&#x56DE;&#x6536;&#x4E86;&#xFF0C;&#x4F46;&#x662F;&#x5728; T4 &#x65F6;&#x523B;&#x6267;&#x884C; set global &#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6743;&#x9650;&#x9A8C;&#x8BC1;&#x8FD8;&#x662F;&#x901A;&#x8FC7;&#x4E86;&#x3002;&#x8FD9;&#x662F;&#x56E0;&#x4E3A; super &#x662F;&#x5168;&#x5C40;&#x6743;&#x9650;&#xFF0C;&#x8FD9;&#x4E2A;&#x6743;&#x9650;&#x4FE1;&#x606F;&#x5728;&#x7EBF;&#x7A0B;&#x5BF9;&#x8C61;&#x4E2D;&#xFF0C;&#x800C; revoke &#x64CD;&#x4F5C;&#x5F71;&#x54CD;&#x4E0D;&#x5230;&#x8FD9;&#x4E2A;&#x7EBF;&#x7A0B;&#x5BF9;&#x8C61;&#x3002;</p>
+<p>&#x800C;&#x5728; T5 &#x65F6;&#x523B;&#x53BB;&#x6389; ua &#x5BF9; db1 &#x5E93;&#x7684;&#x6240;&#x6709;&#x6743;&#x9650;&#x540E;&#xFF0C;&#x5728; T6 &#x65F6;&#x523B; session B &#x518D;&#x64CD;&#x4F5C; db1 &#x5E93;&#x7684;&#x8868;&#xFF0C;&#x5C31;&#x4F1A;&#x62A5;&#x9519;&#x201C;&#x6743;&#x9650;&#x4E0D;&#x8DB3;&#x201D;&#x3002;&#x8FD9;&#x662F;&#x56E0;&#x4E3A; acl_dbs &#x662F;&#x4E00;&#x4E2A;&#x5168;&#x5C40;&#x6570;&#x7EC4;&#xFF0C;&#x6240;&#x6709;&#x7EBF;&#x7A0B;&#x5224;&#x65AD; db &#x6743;&#x9650;&#x90FD;&#x7528;&#x8FD9;&#x4E2A;&#x6570;&#x7EC4;&#xFF0C;&#x8FD9;&#x6837; revoke &#x64CD;&#x4F5C;&#x9A6C;&#x4E0A;&#x5C31;&#x4F1A;&#x5F71;&#x54CD;&#x5230; session B&#x3002;</p>
+<p>&#x8FD9;&#x91CC;&#x5728;&#x4EE3;&#x7801;&#x5B9E;&#x73B0;&#x4E0A;&#x6709;&#x4E00;&#x4E2A;&#x7279;&#x522B;&#x7684;&#x903B;&#x8F91;&#xFF0C;&#x5982;&#x679C;&#x5F53;&#x524D;&#x4F1A;&#x8BDD;&#x5DF2;&#x7ECF;&#x5904;&#x4E8E;&#x67D0;&#x4E00;&#x4E2A; db &#x91CC;&#x9762;&#xFF0C;&#x4E4B;&#x524D; use &#x8FD9;&#x4E2A;&#x5E93;&#x7684;&#x65F6;&#x5019;&#x62FF;&#x5230;&#x7684;&#x5E93;&#x6743;&#x9650;&#x4F1A;&#x4FDD;&#x5B58;&#x5728;&#x4F1A;&#x8BDD;&#x53D8;&#x91CF;&#x4E2D;&#x3002;</p>
+<p>&#x4F60;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x5728; T6 &#x65F6;&#x523B;&#xFF0C;session C &#x548C; session B &#x5BF9;&#x8868; t &#x7684;&#x64CD;&#x4F5C;&#x903B;&#x8F91;&#x662F;&#x4E00;&#x6837;&#x7684;&#x3002;&#x4F46;&#x662F; session B &#x62A5;&#x9519;&#xFF0C;&#x800C; session C &#x53EF;&#x4EE5;&#x6267;&#x884C;&#x6210;&#x529F;&#x3002;&#x8FD9;&#x662F;&#x56E0;&#x4E3A; session C &#x5728; T2 &#x65F6;&#x523B;&#x6267;&#x884C;&#x7684; use db1&#xFF0C;&#x62FF;&#x5230;&#x4E86;&#x8FD9;&#x4E2A;&#x5E93;&#x7684;&#x6743;&#x9650;&#xFF0C;&#x5728;&#x5207;&#x6362;&#x51FA; db1 &#x5E93;&#x4E4B;&#x524D;&#xFF0C;session C &#x5BF9;&#x8FD9;&#x4E2A;&#x5E93;&#x5C31;&#x4E00;&#x76F4;&#x6709;&#x6743;&#x9650;&#x3002;</p>
+<h1 id="&#x8868;&#x6743;&#x9650;&#x548C;&#x5217;&#x6743;&#x9650;">&#x8868;&#x6743;&#x9650;&#x548C;&#x5217;&#x6743;&#x9650;</h1>
+<p>&#x9664;&#x4E86; db &#x7EA7;&#x522B;&#x7684;&#x6743;&#x9650;&#x5916;&#xFF0C;MySQL &#x652F;&#x6301;&#x66F4;&#x7EC6;&#x7C92;&#x5EA6;&#x7684;&#x8868;&#x6743;&#x9650;&#x548C;&#x5217;&#x6743;&#x9650;&#x3002;&#x5176;&#x4E2D;&#xFF0C;&#x8868;&#x6743;&#x9650;&#x5B9A;&#x4E49;&#x5B58;&#x653E;&#x5728;&#x8868; mysql.tables_priv &#x4E2D;&#xFF0C;&#x5217;&#x6743;&#x9650;&#x5B9A;&#x4E49;&#x5B58;&#x653E;&#x5728;&#x8868; mysql.columns_priv &#x4E2D;&#x3002;&#x8FD9;&#x4E24;&#x7C7B;&#x6743;&#x9650;&#xFF0C;&#x7EC4;&#x5408;&#x8D77;&#x6765;&#x5B58;&#x653E;&#x5728;&#x5185;&#x5B58;&#x7684; hash &#x7ED3;&#x6784; column_priv_hash &#x4E2D;&#x3002;</p>
+<p>&#x8FD9;&#x4E24;&#x7C7B;&#x6743;&#x9650;&#x7684;&#x8D4B;&#x6743;&#x547D;&#x4EE4;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code>create table db1.t1(id int, a int);
+
+grant all privileges on db1.t1 to &apos;ua&apos;@&apos;%&apos; with grant option;
+GRANT SELECT(id), INSERT (id,a) ON mydb.mytbl TO &apos;ua&apos;@&apos;%&apos; with grant option;
+</code></pre><p>&#x8DDF; db &#x6743;&#x9650;&#x7C7B;&#x4F3C;&#xFF0C;&#x8FD9;&#x4E24;&#x4E2A;&#x6743;&#x9650;&#x6BCF;&#x6B21; grant &#x7684;&#x65F6;&#x5019;&#x90FD;&#x4F1A;&#x4FEE;&#x6539;&#x6570;&#x636E;&#x8868;&#xFF0C;&#x4E5F;&#x4F1A;&#x540C;&#x6B65;&#x4FEE;&#x6539;&#x5185;&#x5B58;&#x4E2D;&#x7684; hash &#x7ED3;&#x6784;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x5BF9;&#x8FD9;&#x4E24;&#x7C7B;&#x6743;&#x9650;&#x7684;&#x64CD;&#x4F5C;&#xFF0C;&#x4E5F;&#x4F1A;&#x9A6C;&#x4E0A;&#x5F71;&#x54CD;&#x5230;&#x5DF2;&#x7ECF;&#x5B58;&#x5728;&#x7684;&#x8FDE;&#x63A5;&#x3002;</p>
+<p>&#x770B;&#x5230;&#x8FD9;&#x91CC;&#xFF0C;&#x4F60;&#x4E00;&#x5B9A;&#x4F1A;&#x95EE;&#xFF0C;&#x770B;&#x6765; grant &#x8BED;&#x53E5;&#x90FD;&#x662F;&#x5373;&#x65F6;&#x751F;&#x6548;&#x7684;&#xFF0C;&#x90A3;&#x8FD9;&#x4E48;&#x770B;&#x5E94;&#x8BE5;&#x5C31;&#x4E0D;&#x9700;&#x8981;&#x6267;&#x884C; flush privileges &#x8BED;&#x53E5;&#x4E86;&#x5440;&#x3002;</p>
+<p>&#x7B54;&#x6848;&#x4E5F;&#x786E;&#x5B9E;&#x662F;&#x8FD9;&#x6837;&#x7684;&#x3002;</p>
+<p>flush privileges &#x547D;&#x4EE4;&#x4F1A;&#x6E05;&#x7A7A; acl_users &#x6570;&#x7EC4;&#xFF0C;&#x7136;&#x540E;&#x4ECE; mysql.user &#x8868;&#x4E2D;&#x8BFB;&#x53D6;&#x6570;&#x636E;&#x91CD;&#x65B0;&#x52A0;&#x8F7D;&#xFF0C;&#x91CD;&#x65B0;&#x6784;&#x9020;&#x4E00;&#x4E2A; acl_users &#x6570;&#x7EC4;&#x3002;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#xFF0C;&#x4EE5;&#x6570;&#x636E;&#x8868;&#x4E2D;&#x7684;&#x6570;&#x636E;&#x4E3A;&#x51C6;&#xFF0C;&#x4F1A;&#x5C06;&#x5168;&#x5C40;&#x6743;&#x9650;&#x5185;&#x5B58;&#x6570;&#x7EC4;&#x91CD;&#x65B0;&#x52A0;&#x8F7D;&#x4E00;&#x904D;&#x3002;</p>
+<p>&#x540C;&#x6837;&#x5730;&#xFF0C;&#x5BF9;&#x4E8E; db &#x6743;&#x9650;&#x3001;&#x8868;&#x6743;&#x9650;&#x548C;&#x5217;&#x6743;&#x9650;&#xFF0C;MySQL &#x4E5F;&#x505A;&#x4E86;&#x8FD9;&#x6837;&#x7684;&#x5904;&#x7406;&#x3002;</p>
+<p>&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#xFF0C;&#x5982;&#x679C;&#x5185;&#x5B58;&#x7684;&#x6743;&#x9650;&#x6570;&#x636E;&#x548C;&#x78C1;&#x76D8;&#x6570;&#x636E;&#x8868;&#x76F8;&#x540C;&#x7684;&#x8BDD;&#xFF0C;&#x4E0D;&#x9700;&#x8981;&#x6267;&#x884C; flush privileges&#x3002;&#x800C;&#x5982;&#x679C;&#x6211;&#x4EEC;&#x90FD;&#x662F;&#x7528; grant/revoke &#x8BED;&#x53E5;&#x6765;&#x6267;&#x884C;&#x7684;&#x8BDD;&#xFF0C;&#x5185;&#x5B58;&#x548C;&#x6570;&#x636E;&#x8868;&#x672C;&#x6765;&#x5C31;&#x662F;&#x4FDD;&#x6301;&#x540C;&#x6B65;&#x66F4;&#x65B0;&#x7684;&#x3002;</p>
+<p><strong>&#x56E0;&#x6B64;&#xFF0C;&#x6B63;&#x5E38;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;grant &#x547D;&#x4EE4;&#x4E4B;&#x540E;&#xFF0C;&#x6CA1;&#x6709;&#x5FC5;&#x8981;&#x8DDF;&#x7740;&#x6267;&#x884C; flush privileges &#x547D;&#x4EE4;&#x3002;</strong></p>
+<h1 id="flush-privileges-&#x4F7F;&#x7528;&#x573A;&#x666F;">flush privileges &#x4F7F;&#x7528;&#x573A;&#x666F;</h1>
+<p>&#x90A3;&#x4E48;&#xFF0C;flush privileges &#x662F;&#x5728;&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x4F7F;&#x7528;&#x5462;&#xFF1F;&#x663E;&#x7136;&#xFF0C;&#x5F53;&#x6570;&#x636E;&#x8868;&#x4E2D;&#x7684;&#x6743;&#x9650;&#x6570;&#x636E;&#x8DDF;&#x5185;&#x5B58;&#x4E2D;&#x7684;&#x6743;&#x9650;&#x6570;&#x636E;&#x4E0D;&#x4E00;&#x81F4;&#x7684;&#x65F6;&#x5019;&#xFF0C;flush privileges &#x8BED;&#x53E5;&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x91CD;&#x5EFA;&#x5185;&#x5B58;&#x6570;&#x636E;&#xFF0C;&#x8FBE;&#x5230;&#x4E00;&#x81F4;&#x72B6;&#x6001;&#x3002;</p>
+<p>&#x8FD9;&#x79CD;&#x4E0D;&#x4E00;&#x81F4;&#x5F80;&#x5F80;&#x662F;&#x7531;&#x4E0D;&#x89C4;&#x8303;&#x7684;&#x64CD;&#x4F5C;&#x5BFC;&#x81F4;&#x7684;&#xFF0C;&#x6BD4;&#x5982;&#x76F4;&#x63A5;&#x7528; DML &#x8BED;&#x53E5;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x6743;&#x9650;&#x8868;&#x3002;&#x6211;&#x4EEC;&#x6765;&#x770B;&#x4E00;&#x4E0B;&#x4E0B;&#x9762;&#x8FD9;&#x4E2A;&#x573A;&#x666F;&#xFF1A;</p>
+<p><img src="../image/9031814361be42b7bc084ad2ab2aa3ec.png" alt="img"></p>
+<p>&#x56FE; 4 &#x4F7F;&#x7528; flush privileges</p>
+<p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#xFF0C;T3 &#x65F6;&#x523B;&#x867D;&#x7136;&#x5DF2;&#x7ECF;&#x7528; delete &#x8BED;&#x53E5;&#x5220;&#x9664;&#x4E86;&#x7528;&#x6237; ua&#xFF0C;&#x4F46;&#x662F;&#x5728; T4 &#x65F6;&#x523B;&#xFF0C;&#x4ECD;&#x7136;&#x53EF;&#x4EE5;&#x7528; ua &#x8FDE;&#x63A5;&#x6210;&#x529F;&#x3002;&#x539F;&#x56E0;&#x5C31;&#x662F;&#xFF0C;&#x8FD9;&#x65F6;&#x5019;&#x5185;&#x5B58;&#x4E2D; acl_users &#x6570;&#x7EC4;&#x4E2D;&#x8FD8;&#x6709;&#x8FD9;&#x4E2A;&#x7528;&#x6237;&#xFF0C;&#x56E0;&#x6B64;&#x7CFB;&#x7EDF;&#x5224;&#x65AD;&#x65F6;&#x8BA4;&#x4E3A;&#x7528;&#x6237;&#x8FD8;&#x6B63;&#x5E38;&#x5B58;&#x5728;&#x3002;</p>
+<p>&#x5728; T5 &#x65F6;&#x523B;&#x6267;&#x884C;&#x8FC7; flush &#x547D;&#x4EE4;&#x540E;&#xFF0C;&#x5185;&#x5B58;&#x66F4;&#x65B0;&#xFF0C;T6 &#x65F6;&#x523B;&#x518D;&#x8981;&#x7528; ua &#x6765;&#x767B;&#x5F55;&#x7684;&#x8BDD;&#xFF0C;&#x5C31;&#x4F1A;&#x62A5;&#x9519;&#x201C;&#x65E0;&#x6CD5;&#x8BBF;&#x95EE;&#x201D;&#x4E86;&#x3002;</p>
+<p>&#x76F4;&#x63A5;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x8868;&#x662F;&#x4E0D;&#x89C4;&#x8303;&#x7684;&#x64CD;&#x4F5C;&#xFF0C;&#x8FD9;&#x4E2A;&#x4E0D;&#x4E00;&#x81F4;&#x72B6;&#x6001;&#x4E5F;&#x4F1A;&#x5BFC;&#x81F4;&#x4E00;&#x4E9B;&#x66F4;&#x201C;&#x8BE1;&#x5F02;&#x201D;&#x7684;&#x73B0;&#x8C61;&#x53D1;&#x751F;&#x3002;&#x6BD4;&#x5982;&#xFF0C;&#x524D;&#x9762;&#x8FD9;&#x4E2A;&#x901A;&#x8FC7; delete &#x8BED;&#x53E5;&#x5220;&#x9664;&#x7528;&#x6237;&#x7684;&#x4F8B;&#x5B50;&#xFF0C;&#x5C31;&#x4F1A;&#x51FA;&#x73B0;&#x4E0B;&#x9762;&#x7684;&#x60C5;&#x51B5;&#xFF1A;</p>
+<p><img src="../image/dd625b6b4eb2dcbdaac73648a1af50f1.png" alt="img"></p>
+<p>&#x56FE; 5 &#x4E0D;&#x89C4;&#x8303;&#x6743;&#x9650;&#x64CD;&#x4F5C;&#x5BFC;&#x81F4;&#x7684;&#x5F02;&#x5E38;</p>
+<p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#xFF0C;&#x7531;&#x4E8E;&#x5728; T3 &#x65F6;&#x523B;&#x76F4;&#x63A5;&#x5220;&#x9664;&#x4E86;&#x6570;&#x636E;&#x8868;&#x7684;&#x8BB0;&#x5F55;&#xFF0C;&#x800C;&#x5185;&#x5B58;&#x7684;&#x6570;&#x636E;&#x8FD8;&#x5B58;&#x5728;&#x3002;&#x8FD9;&#x5C31;&#x5BFC;&#x81F4;&#x4E86;&#xFF1A;</p>
+<ol>
+<li>T4 &#x65F6;&#x523B;&#x7ED9;&#x7528;&#x6237; ua &#x8D4B;&#x6743;&#x9650;&#x5931;&#x8D25;&#xFF0C;&#x56E0;&#x4E3A; mysql.user &#x8868;&#x4E2D;&#x627E;&#x4E0D;&#x5230;&#x8FD9;&#x884C;&#x8BB0;&#x5F55;&#xFF1B;</li>
+<li>&#x800C; T5 &#x65F6;&#x523B;&#x8981;&#x91CD;&#x65B0;&#x521B;&#x5EFA;&#x8FD9;&#x4E2A;&#x7528;&#x6237;&#x4E5F;&#x4E0D;&#x884C;&#xFF0C;&#x56E0;&#x4E3A;&#x5728;&#x505A;&#x5185;&#x5B58;&#x5224;&#x65AD;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4F1A;&#x8BA4;&#x4E3A;&#x8FD9;&#x4E2A;&#x7528;&#x6237;&#x8FD8;&#x5B58;&#x5728;&#x3002;</li>
+</ol>
+<h1 id="&#x5C0F;&#x7ED3;">&#x5C0F;&#x7ED3;</h1>
+<p>&#x4ECA;&#x5929;&#x8FD9;&#x7BC7;&#x6587;&#x7AE0;&#xFF0C;&#x6211;&#x548C;&#x4F60;&#x4ECB;&#x7ECD;&#x4E86; MySQL &#x7528;&#x6237;&#x6743;&#x9650;&#x5728;&#x6570;&#x636E;&#x8868;&#x548C;&#x5185;&#x5B58;&#x4E2D;&#x7684;&#x5B58;&#x5728;&#x5F62;&#x5F0F;&#xFF0C;&#x4EE5;&#x53CA; grant &#x548C; revoke &#x547D;&#x4EE4;&#x7684;&#x6267;&#x884C;&#x903B;&#x8F91;&#x3002;</p>
+<p>grant &#x8BED;&#x53E5;&#x4F1A;&#x540C;&#x65F6;&#x4FEE;&#x6539;&#x6570;&#x636E;&#x8868;&#x548C;&#x5185;&#x5B58;&#xFF0C;&#x5224;&#x65AD;&#x6743;&#x9650;&#x7684;&#x65F6;&#x5019;&#x4F7F;&#x7528;&#x7684;&#x662F;&#x5185;&#x5B58;&#x6570;&#x636E;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x89C4;&#x8303;&#x5730;&#x4F7F;&#x7528; grant &#x548C; revoke &#x8BED;&#x53E5;&#xFF0C;&#x662F;&#x4E0D;&#x9700;&#x8981;&#x968F;&#x540E;&#x52A0;&#x4E0A; flush privileges &#x8BED;&#x53E5;&#x7684;&#x3002;</p>
+<p>flush privileges &#x8BED;&#x53E5;&#x672C;&#x8EAB;&#x4F1A;&#x7528;&#x6570;&#x636E;&#x8868;&#x7684;&#x6570;&#x636E;&#x91CD;&#x5EFA;&#x4E00;&#x4EFD;&#x5185;&#x5B58;&#x6743;&#x9650;&#x6570;&#x636E;&#xFF0C;&#x6240;&#x4EE5;&#x5728;&#x6743;&#x9650;&#x6570;&#x636E;&#x53EF;&#x80FD;&#x5B58;&#x5728;&#x4E0D;&#x4E00;&#x81F4;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#x518D;&#x4F7F;&#x7528;&#x3002;&#x800C;&#x8FD9;&#x79CD;&#x4E0D;&#x4E00;&#x81F4;&#x5F80;&#x5F80;&#x662F;&#x7531;&#x4E8E;&#x76F4;&#x63A5;&#x7528; DML &#x8BED;&#x53E5;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x6743;&#x9650;&#x8868;&#x5BFC;&#x81F4;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x5C3D;&#x91CF;&#x4E0D;&#x8981;&#x4F7F;&#x7528;&#x8FD9;&#x7C7B;&#x8BED;&#x53E5;&#x3002;</p>
+<p>&#x53E6;&#x5916;&#xFF0C;&#x5728;&#x4F7F;&#x7528; grant &#x8BED;&#x53E5;&#x8D4B;&#x6743;&#x65F6;&#xFF0C;&#x4F60;&#x53EF;&#x80FD;&#x8FD8;&#x4F1A;&#x770B;&#x5230;&#x8FD9;&#x6837;&#x7684;&#x5199;&#x6CD5;&#xFF1A;</p>
+<pre><code>grant super on *.* to &apos;ua&apos;@&apos;%&apos; identified by &apos;pa&apos;;
+</code></pre><p>&#x8FD9;&#x6761;&#x547D;&#x4EE4;&#x52A0;&#x4E86; identified by &#x2018;&#x5BC6;&#x7801;&#x2019;&#xFF0C; &#x8BED;&#x53E5;&#x7684;&#x903B;&#x8F91;&#x91CC;&#x9762;&#x9664;&#x4E86;&#x8D4B;&#x6743;&#x5916;&#xFF0C;&#x8FD8;&#x5305;&#x542B;&#x4E86;&#xFF1A;</p>
+<ol>
+<li>&#x5982;&#x679C;&#x7528;&#x6237;&#x2019;ua&#x2019;@&#x2019;%&apos;&#x4E0D;&#x5B58;&#x5728;&#xFF0C;&#x5C31;&#x521B;&#x5EFA;&#x8FD9;&#x4E2A;&#x7528;&#x6237;&#xFF0C;&#x5BC6;&#x7801;&#x662F; pa&#xFF1B;</li>
+<li>&#x5982;&#x679C;&#x7528;&#x6237; ua &#x5DF2;&#x7ECF;&#x5B58;&#x5728;&#xFF0C;&#x5C31;&#x5C06;&#x5BC6;&#x7801;&#x4FEE;&#x6539;&#x6210; pa&#x3002;</li>
+</ol>
+<p>&#x8FD9;&#x4E5F;&#x662F;&#x4E00;&#x79CD;&#x4E0D;&#x5EFA;&#x8BAE;&#x7684;&#x5199;&#x6CD5;&#xFF0C;&#x56E0;&#x4E3A;&#x8FD9;&#x79CD;&#x5199;&#x6CD5;&#x5F88;&#x5BB9;&#x6613;&#x5C31;&#x4F1A;&#x4E0D;&#x614E;&#x628A;&#x5BC6;&#x7801;&#x7ED9;&#x6539;&#x4E86;&#x3002;</p>
+<p>&#x201C;grant &#x4E4B;&#x540E;&#x968F;&#x624B;&#x52A0; flush privileges&#x201D;&#xFF0C;&#x6211;&#x81EA;&#x5DF1;&#x662F;&#x8FD9;&#x4E48;&#x4F7F;&#x7528;&#x4E86;&#x4E24;&#x4E09;&#x5E74;&#x4E4B;&#x540E;&#xFF0C;&#x5728;&#x770B;&#x4EE3;&#x7801;&#x7684;&#x65F6;&#x5019;&#x624D;&#x53D1;&#x73B0;&#x5176;&#x5B9E;&#x5E76;&#x4E0D;&#x9700;&#x8981;&#x8FD9;&#x6837;&#x505A;&#xFF0C;&#x90A3;&#x5DF2;&#x7ECF;&#x662F; 2011 &#x5E74;&#x7684;&#x4E8B;&#x60C5;&#x4E86;&#x3002;</p>
+<p>&#x53BB;&#x5E74;&#x6211;&#x770B;&#x5230;&#x4E00;&#x4F4D;&#x5C0F;&#x4F19;&#x4F34;&#x8FD9;&#x4E48;&#x64CD;&#x4F5C;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6307;&#x51FA;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x65F6;&#xFF0C;&#x4ED6;&#x4E5F;&#x89C9;&#x5F97;&#x5F88;&#x795E;&#x5947;&#x3002;&#x56E0;&#x4E3A;&#xFF0C;&#x4ED6;&#x548C;&#x6211;&#x4E00;&#x6837;&#x770B;&#x7684;&#x7B2C;&#x4E00;&#x4EFD;&#x6587;&#x6863;&#x5C31;&#x662F;&#x8FD9;&#x4E48;&#x5199;&#x7684;&#xFF0C;&#x81EA;&#x5DF1;&#x4E5F;&#x4E00;&#x76F4;&#x662F;&#x8FD9;&#x4E48;&#x7528;&#x7684;&#x3002;</p>
+<p>&#x6240;&#x4EE5;&#xFF0C;&#x4ECA;&#x5929;&#x7684;&#x8BFE;&#x540E;&#x95EE;&#x9898;&#x662F;&#xFF0C;&#x8BF7;&#x4F60;&#x4E5F;&#x6765;&#x8BF4;&#x4E00;&#x8BF4;&#xFF0C;&#x5728;&#x4F7F;&#x7528;&#x6570;&#x636E;&#x5E93;&#x6216;&#x8005;&#x5199;&#x4EE3;&#x7801;&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x6709;&#x6CA1;&#x6709;&#x9047;&#x5230;&#x8FC7;&#x7C7B;&#x4F3C;&#x7684;&#x573A;&#x666F;&#xFF1A;&#x8BEF;&#x7528;&#x4E86;&#x5F88;&#x957F;&#x65F6;&#x95F4;&#x4EE5;&#x540E;&#xFF0C;&#x7531;&#x4E8E;&#x4E00;&#x4E2A;&#x5951;&#x673A;&#x53D1;&#x73B0;&#x201C;&#x554A;&#xFF0C;&#x539F;&#x6765;&#x6211;&#x9519;&#x4E86;&#x8FD9;&#x4E48;&#x4E45;&#x201D;&#xFF1F;</p>
+<p>&#x4F60;&#x53EF;&#x4EE5;&#x628A;&#x4F60;&#x7684;&#x7ECF;&#x5386;&#x5199;&#x5728;&#x7559;&#x8A00;&#x533A;&#xFF0C;&#x6211;&#x4F1A;&#x5728;&#x4E0B;&#x4E00;&#x7BC7;&#x6587;&#x7AE0;&#x7684;&#x672B;&#x5C3E;&#x9009;&#x53D6;&#x6709;&#x8DA3;&#x7684;&#x8BC4;&#x8BBA;&#x548C;&#x4F60;&#x5206;&#x4EAB;&#x3002;&#x611F;&#x8C22;&#x4F60;&#x7684;&#x6536;&#x542C;&#xFF0C;&#x4E5F;&#x6B22;&#x8FCE;&#x4F60;&#x628A;&#x8FD9;&#x7BC7;&#x6587;&#x7AE0;&#x5206;&#x4EAB;&#x7ED9;&#x66F4;&#x591A;&#x7684;&#x670B;&#x53CB;&#x4E00;&#x8D77;&#x9605;&#x8BFB;&#x3002;</p>
+<h1 id="&#x4E0A;&#x671F;&#x95EE;&#x9898;&#x65F6;&#x95F4;">&#x4E0A;&#x671F;&#x95EE;&#x9898;&#x65F6;&#x95F4;</h1>
+<p>&#x4E0A;&#x671F;&#x7684;&#x95EE;&#x9898;&#x662F;&#xFF0C;MySQL &#x89E3;&#x6790; statement &#x683C;&#x5F0F;&#x7684; binlog &#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5BF9;&#x4E8E; load data &#x547D;&#x4EE4;&#xFF0C;&#x89E3;&#x6790;&#x51FA;&#x6765;&#x4E3A;&#x4EC0;&#x4E48;&#x7528;&#x7684;&#x662F; load data local&#x3002;</p>
+<p>&#x8FD9;&#x6837;&#x505A;&#x7684;&#x4E00;&#x4E2A;&#x539F;&#x56E0;&#x662F;&#xFF0C;&#x4E3A;&#x4E86;&#x786E;&#x4FDD;&#x5907;&#x5E93;&#x5E94;&#x7528; binlog &#x6B63;&#x5E38;&#x3002;&#x56E0;&#x4E3A;&#x5907;&#x5E93;&#x53EF;&#x80FD;&#x914D;&#x7F6E;&#x4E86; secure_file_priv=null&#xFF0C;&#x6240;&#x4EE5;&#x5982;&#x679C;&#x4E0D;&#x7528; local &#x7684;&#x8BDD;&#xFF0C;&#x53EF;&#x80FD;&#x4F1A;&#x5BFC;&#x5165;&#x5931;&#x8D25;&#xFF0C;&#x9020;&#x6210;&#x4E3B;&#x5907;&#x540C;&#x6B65;&#x5EF6;&#x8FDF;&#x3002;</p>
+<p>&#x53E6;&#x4E00;&#x79CD;&#x5E94;&#x7528;&#x573A;&#x666F;&#x662F;&#x4F7F;&#x7528; mysqlbinlog &#x5DE5;&#x5177;&#x89E3;&#x6790; binlog &#x6587;&#x4EF6;&#xFF0C;&#x5E76;&#x5E94;&#x7528;&#x5230;&#x76EE;&#x6807;&#x5E93;&#x7684;&#x60C5;&#x51B5;&#x3002;&#x4F60;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4E0B;&#x9762;&#x8FD9;&#x6761;&#x547D;&#x4EE4; &#xFF1A;</p>
+<pre><code>mysqlbinlog $binlog_file | mysql -h$host -P$port -u$user -p$pwd
+</code></pre><p>&#x628A;&#x65E5;&#x5FD7;&#x76F4;&#x63A5;&#x89E3;&#x6790;&#x51FA;&#x6765;&#x53D1;&#x7ED9;&#x76EE;&#x6807;&#x5E93;&#x6267;&#x884C;&#x3002;&#x589E;&#x52A0; local&#xFF0C;&#x5C31;&#x80FD;&#x8BA9;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x652F;&#x6301;&#x975E;&#x672C;&#x5730;&#x7684; $host&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="41.html" class="navigation navigation-prev " aria-label="Previous page: 41 | 怎么最快地复制一张表？">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="43.html" class="navigation navigation-next " aria-label="Next page: 43 | 要不要使用分区表？">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"42 | grant之后要跟着flush privileges吗？","level":"1.1.43","depth":2,"next":{"title":"43 | 要不要使用分区表？","level":"1.1.44","depth":2,"path":"doc/43.md","ref":"doc/43.md","articles":[]},"previous":{"title":"41 | 怎么最快地复制一张表？","level":"1.1.42","depth":2,"path":"doc/41.md","ref":"doc/41.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"doc/42.md","mtime":"2019-03-14T13:50:57.612Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-03-15T07:27:20.381Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
